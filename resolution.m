@@ -10,7 +10,7 @@ files =  dir('matrixes/')
 
 for i = 3 : size(files, 1)
     
-    A = load([f(i).folder, '/', f(i).name])
+    A = load([files(i).folder, '/', files(i).name])
     xe = ones(size(A, 1), 1);
     b = A * xe;
 
@@ -31,6 +31,7 @@ for i = 3 : size(files, 1)
     ending_memory = sum([allvars.bytes]);
 
     if (uint8(x_sol) == xe)
+        display([ "La matrice: ", files(i).name])
         display("Ok la soluzione è corretta");
         e = norm(x_sol - xe) / norm(xe);
         display(sprintf("L'errore è %d", e));
