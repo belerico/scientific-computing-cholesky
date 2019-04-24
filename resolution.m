@@ -1,3 +1,8 @@
+%%% README
+% per lanciare questo script bisogna creare una cartella 'matrixes' e
+% metterci dentro le matrici da analizzare
+%%%
+
 clear
 
 % Test Matrix
