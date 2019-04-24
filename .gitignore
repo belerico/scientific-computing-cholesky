@@ -1,3 +1,4 @@
+*.part
 *.mat
 ./matrices/*
 .vscode
