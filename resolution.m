@@ -1,12 +1,12 @@
 %%% README
-% per lanciare questo script bisogna creare una cartella 'matrixes' e
+% per lanciare questo script bisogna creare una cartella 'matrices' e
 % metterci dentro le matrici da analizzare
 %%%
 
 clear
 
 % Test Matrix
-files =  dir('matrixes/')
+files =  dir('matrices/')
 
 for i = 3 : size(files, 1)
     
@@ -32,10 +32,10 @@ for i = 3 : size(files, 1)
 
     if (uint8(x_sol) == xe)
         display([ "La matrice: ", files(i).name])
-        display("Ok la soluzione è corretta");
+        display("Ok la soluzione ï¿½ corretta");
         e = norm(x_sol - xe) / norm(xe);
-        display(sprintf("L'errore è %d", e));
-        display(sprintf("La memoria usata (in Byte) è %d", (ending_memory - init_memory)));
+        display(sprintf("L'errore ï¿½ %d", e));
+        display(sprintf("La memoria usata (in Byte) ï¿½ %d", (ending_memory - init_memory)));
 
 
     end
