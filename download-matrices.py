@@ -35,7 +35,7 @@ def download_with_resume(url, file_path):
                     first_byte += len(chunk)
                     f.write(chunk)
                     done = int(50 * first_byte / file_size)
-                    sys.stdout.write("\r[%s%s] %d%% %.1f KB/s" % (
+                    sys.stdout.write("\r[%s%s] %d%% %.1fKB/s" % (
                         '=' * done, # How many chunk has been downloaded
                         ' ' * (50 - done), # How many left
                         done * 2, # Since the total percentage is computed on 50 '=', we multiply by 2 to rescale to 100
