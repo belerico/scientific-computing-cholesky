@@ -6,12 +6,16 @@
 clear
 
 % Test Matrix
-files =  dir('../matrices/')
+files =  dir('../matrices/');
 
 for i = 3 : size(files, 1)
-    A = load([files(i).folder, '/', files(i).name])
+    M = load([files(i).folder, '/', files(i).name]);
+  
+    A = triu(M.Problem.A);
+    M = []
     xe = ones(size(A, 1), 1);
     b = A * xe;
+    xe = [];
     allvars = whos;
     init_memory = sum([allvars.bytes]);
 
@@ -25,6 +29,7 @@ for i = 3 : size(files, 1)
     %% Check
     allvars = whos;
     ending_memory = sum([allvars.bytes]);
+    xe = ones(size(A, 1), 1);
     if (uint8(x_sol) == xe)
         display([ "La matrice: ", files(i).name])
         display("Ok la soluzione � corretta");
