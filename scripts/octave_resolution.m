@@ -1,5 +1,5 @@
 do
-  clearvars;
+  clear;
   % choose matrix
   matrix_file_names = ['Flan_1565.mat'; 'StocF-1465.mat'; 'cfd2.mat'; 'cfd1.mat'; 'G3_circuit.mat'; 'parabolic_fem.mat'; 'apache2.mat'; 'shallow_water1.mat'; 'ex15.mat'];
   matrices = cellstr(matrix_file_names);
@@ -11,10 +11,10 @@ do
 
     % set up vars
     A = Problem.A; % crea solo un nuovo reference, non duplica
-    clearvars Problem; % elimina tutte le info tranne A, salvata con l'altra var
+    clear Problem; % elimina tutte le info tranne A, salvata con l'altra var
     xe = ones(rows(A), 1);
     b = A*xe;
-    clearvars matrix_file_names matrices choice again;
+    clear matrix_file_names matrices choice again;
     memory_start = sum([whos.bytes]);
 
     % solve system
