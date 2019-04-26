@@ -1,9 +1,10 @@
-clear;
-matrices = cellstr(['Flan_1565'; 'StocF-1465'; 'cfd2'; 'cfd1'; 'G3_circuit'; 'parabolic_fem'; 'apache2'; 'shallow_water1'; 'ex15']);
-for i = 1:9
+clear;%'Flan_1565'; 'StocF-1465'; 
+matrices = cellstr(['cfd2'; 'cfd1'; 'G3_circuit'; 'parabolic_fem'; 'apache2'; 'shallow_water1'; 'ex15']);
+for i = 1:7%9
   clear -x i matrices;
   if(exist(['../matrices/',  matrices{i}, '.mat'], 'file'))
     % load data
+    disp('---')
     disp(['Loading matrix ', matrices{i}, '...'])
     load(['../matrices/',  matrices{i}, '.mat']); % crea una struct Problem con varie info, tra cui A
     disp('Matrix loaded')
@@ -29,7 +30,6 @@ for i = 1:9
       relative_error = norm(x - xe) / norm(xe);
       disp(sprintf('Relative error: %d', relative_error))
       disp(sprintf('Memory used: %d Bytes', memory))
-      whos
     else
       disp('Wrong result')
     endif
