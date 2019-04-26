@@ -5,6 +5,7 @@
 clear
 
 % Test Matrix
+<<<<<<< HEAD
 files =  dir('matrices/');
 
 for i = 3 : size(files, 1)
@@ -13,9 +14,19 @@ for i = 3 : size(files, 1)
     disp('Setting matrix A')
     A = matFile.Problem.A;
     disp('Compute exact solution xe')
+=======
+files =  dir('../matrices/');
+
+for i = 3 : size(files, 1)
+    M = load([files(i).folder, '/', files(i).name]);
+  
+    A = triu(M.Problem.A);
+    M = []
+>>>>>>> 1b524008c5a2824306e155008b581004c53f8088
     xe = ones(size(A, 1), 1);
     disp('Compute b')
     b = A * xe;
+    xe = [];
     allvars = whos;
     init_memory = sum([allvars.bytes]);
 
@@ -31,6 +42,7 @@ for i = 3 : size(files, 1)
     %% Check
     allvars = whos;
     ending_memory = sum([allvars.bytes]);
+    xe = ones(size(A, 1), 1);
     if (uint8(x_sol) == xe)
         disp([ "La matrice: ", files(i).name])
         disp("Ok la soluzione e' corretta");
