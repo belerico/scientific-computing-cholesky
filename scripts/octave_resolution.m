@@ -1,10 +1,10 @@
 do
   clear;
   % choose matrix
-  matrix_file_names = ['Flan_1565.mat'; 'StocF-1465.mat'; 'cfd2.mat'; 'cfd1.mat'; 'G3_circuit.mat'; 'parabolic_fem.mat'; 'apache2.mat'; 'shallow_water1.mat'; 'ex15.mat'];
+  matrix_file_names = ['Annulla operazione'; 'Flan_1565.mat'; 'StocF-1465.mat'; 'cfd2.mat'; 'cfd1.mat'; 'G3_circuit.mat'; 'parabolic_fem.mat'; 'apache2.mat'; 'shallow_water1.mat'; 'ex15.mat'];
   matrices = cellstr(matrix_file_names);
-  choice = menu('Choose matrix (1-9)', matrices{1}, matrices{2}, matrices{3}, matrices{4}, matrices{5}, matrices{6}, matrices{7}, matrices{8}, matrices{9});
-  if(choice >= 1 && choice <= 9 && isfile(['../matrices/',  matrices{choice}]))
+  choice = menu('Choose matrix (1-10)', matrices{1}, matrices{2}, matrices{3}, matrices{4}, matrices{5}, matrices{6}, matrices{7}, matrices{8}, matrices{9}, matrices{10});
+  if(choice >= 2 && choice <= 10 && exist(['../matrices/',  matrices{choice}], 'file'))
     % load data
     disp(['File: ', matrices{choice}]);
     load(['../matrices/',  matrices{choice}]); % crea una struct Problem con varie info, tra cui A
