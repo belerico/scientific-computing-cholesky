@@ -10,26 +10,20 @@ files =  dir('../matrices/');
 
 for i = 3 : size(files, 1)
     M = load([files(i).folder, '/', files(i).name]);
-  
-    A = triu(M.Problem.A);
-    M = []
+    A = M.Problem.A;
     xe = ones(size(A, 1), 1);
     b = A * xe;
-    xe = [];
     allvars = whos;
     init_memory = sum([allvars.bytes]);
 
     %% Solve the system
     tic
-    L = chol(A);
-    Y = linsolve(L, b);
-    x_sol = linsolve(L, Y);
+    x_sol = A \ b;
     toc
 
     %% Check
     allvars = whos;
     ending_memory = sum([allvars.bytes]);
-    xe = ones(size(A, 1), 1);
     if (uint8(x_sol) == xe)
         display([ "La matrice: ", files(i).name])
         display("Ok la soluzione � corretta");
