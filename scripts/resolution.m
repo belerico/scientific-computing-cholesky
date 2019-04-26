@@ -5,16 +5,6 @@
 clear
 
 % Test Matrix
-<<<<<<< HEAD
-files =  dir('matrices/');
-
-for i = 3 : size(files, 1)
-    disp(['Loading' ' ' files(i).name])
-    matFile = load([files(i).folder, '/', files(i).name]);
-    disp('Setting matrix A')
-    A = matFile.Problem.A;
-    disp('Compute exact solution xe')
-=======
 files =  dir('../matrices/');
 
 for i = 3 : size(files, 1)
@@ -22,7 +12,6 @@ for i = 3 : size(files, 1)
   
     A = triu(M.Problem.A);
     M = []
->>>>>>> 1b524008c5a2824306e155008b581004c53f8088
     xe = ones(size(A, 1), 1);
     disp('Compute b')
     b = A * xe;
