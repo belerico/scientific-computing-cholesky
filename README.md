@@ -5,7 +5,7 @@ Steps for a proper installtion:
 
 * `python3 download-matrices.py`
 * `sudo apt install libsuitesparse-dev`. This is necessary if we want to work with a full-compatible library for Cholesky decomposition (scikit-sparse) of sparse matrices
-* `pip3 install -U py-install.txt`
+* `pip3 install -r requirements.txt`
 
 Useful memory profiler:
 
