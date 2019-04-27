@@ -1,6 +1,6 @@
-clear;%'Flan_1565'; 'StocF-1465'; 
-matrices = cellstr(['cfd2'; 'cfd1'; 'G3_circuit'; 'parabolic_fem'; 'apache2'; 'shallow_water1'; 'ex15']);
-for i = 1:7%9
+clear;
+matrices = cellstr(['Flan_1565'; 'StocF-1465'; 'cfd2'; 'cfd1'; 'G3_circuit'; 'parabolic_fem'; 'apache2'; 'shallow_water1'; 'ex15']);
+for i = 1:9
   clear -x i matrices;
   if(exist(['../matrices/',  matrices{i}, '.mat'], 'file'))
     % load data
