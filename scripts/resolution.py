@@ -11,7 +11,7 @@ RESULTS_DIR = os.path.join(CWD, 'results')
 
 matrices = os.listdir(MATRICES_DIR)
 
-for matrix in ['shallow_water1.mat']:
+for matrix in matrices:
     A = io.loadmat(os.path.join(MATRICES_DIR, matrix))['Problem']['A'][0][0]
     print('Resolving for ' + matrix)
     xe = numpy.ones([A.shape[0], 1])
