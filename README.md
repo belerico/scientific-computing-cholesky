@@ -1,5 +1,13 @@
 # scientific-computing-cholesky
 
 Comparison between different scientific computing tool on the Cholesky decomposition.  
-Before doing anything run the following command in order to download all the necessary matrices:  
-`python3 download-matrices.py`
+Steps for a proper installtion:
+
+* `python3 download-matrices.py`
+* `sudo apt install libsuitesparse-dev`. This is necessary if we want to work with a full-compatible library for Cholesky decomposition (scikit-sparse) of sparse matrices
+* `pip3 install -r requirements.txt`
+
+Useful memory profiler:
+
+* https://github.com/pythonprofilers/memory_profiler
+* https://github.com/astrofrog/psrecord
