@@ -1,0 +1,289 @@
+MATLAB is selecting SOFTWARE OPENGL rendering.
+[?1h=
+                                                  < M A T L A B (R) >
+                                        Copyright 1984-2019 The MathWorks, Inc.
+                                        R2019a (9.6.0.1072779) 64-bit (glnxa64)
+                                                     March 8, 2019
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+>> %%-- 04/29/19 06:50:11 AM --%%quit()                        run('scripts/resolution.m')
+
+pid =
+
+       21133
+
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    44452072
+
+Solving system with Cholesky factorization...
+Elapsed time is 290.995881 seconds.
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    44452072
+
+Done
+    "La matrice: "    "Flan_1565.mat"
+
+Ok la soluzione e' corretta
+L'errore e' 1.190029e-12    24
+
+La memoria usata (in Byte) e' 0    31
+
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    45431080
+
+Solving system with Cholesky factorization...
+Elapsed time is 9.896822 seconds.
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    45431080
+
+Done
+    "La matrice: "    "G3_circuit.mat"
+
+Ok la soluzione e' corretta
+L'errore e' 3.523124e-12    24
+
+La memoria usata (in Byte) e' 0    31
+
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    45431080
+
+Solving system with Cholesky factorization...
+Elapsed time is 225.270732 seconds.
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    45431080
+
+Done
+    "La matrice: "    "StocF-1465.mat"
+
+Ok la soluzione e' corretta
+L'errore e' 1.100927e-10    24
+
+La memoria usata (in Byte) e' 0    31
+
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    45431080
+
+Solving system with Cholesky factorization...
+Elapsed time is 7.187571 seconds.
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    45431080
+
+Done
+    "La matrice: "    "apache2.mat"
+
+Ok la soluzione e' corretta
+L'errore e' 4.374109e-11    24
+
+La memoria usata (in Byte) e' 0    31
+
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    45431080
+
+Solving system with Cholesky factorization...
+Elapsed time is 1.224156 seconds.
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    45431080
+
+Done
+    "La matrice: "    "cfd1.mat"
+
+Ok la soluzione e' corretta
+L'errore e' 9.451041e-14    24
+
+La memoria usata (in Byte) e' 0    31
+
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    45431080
+
+Solving system with Cholesky factorization...
+Elapsed time is 2.706089 seconds.
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    45431080
+
+Done
+    "La matrice: "    "cfd2.mat"
+
+Ok la soluzione e' corretta
+L'errore e' 4.129768e-13    24
+
+La memoria usata (in Byte) e' 0    31
+
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    45431080
+
+Solving system with Cholesky factorization...
+Elapsed time is 0.014104 seconds.
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    45431080
+
+Done
+    "La matrice: "    "ex15.mat"
+
+Ok la soluzione e' corretta
+L'errore e' 6.803037e-07    24
+
+La memoria usata (in Byte) e' 0    31
+
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    45431080
+
+Solving system with Cholesky factorization...
+Elapsed time is 2.240380 seconds.
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    45431080
+
+Done
+    "La matrice: "    "parabolic_fem.mat"
+
+Ok la soluzione e' corretta
+L'errore e' 1.085933e-12    24
+
+La memoria usata (in Byte) e' 0    31
+
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    45431080
+
+Solving system with Cholesky factorization...
+Elapsed time is 0.216017 seconds.
+
+r =
+
+java.lang.Runtime@1ed4ae0f
+
+
+result =
+
+    45431080
+
+Done
+    "La matrice: "    "shallow_water1.mat"
+
+Ok la soluzione e' corretta
+L'errore e' 2.376904e-16    24
+
+La memoria usata (in Byte) e' 0    31
+
+>> q quit()
+[?1l>
