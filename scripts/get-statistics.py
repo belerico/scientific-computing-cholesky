@@ -15,7 +15,7 @@ if __name__ == '__main__':
         for matrix in matrices:
             command = ''
             if tool == 'matlab':
-                command = 'psrecord "matlab -nojvm -nodisplay -nosplash -nodesktop -r \\"addpath(genpath(pwd));resolution(\'' + matrix + '\');exit;\\"" '
+                command = 'psrecord "matlab -nodisplay -nosplash -nodesktop -r \\"addpath(genpath(pwd));resolution(\'' + matrix + '\');exit;\\"" '
             elif tool == 'python':
                 command = 'psrecord "python3 ' + os.path.join(CWD, 'resolution.py') + ' ' + matrix + '" '
             command += '--include-children \
