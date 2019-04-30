@@ -30,15 +30,17 @@ def resolution(matrix):
 
 if __name__ == '__main__':
         for matrix in matrices:
-                results = 'Resolving for: ' + matrix + '\n'
+                results = 'Resolving ' + matrix + '\n'
                 xe, x, elapsed, mem = resolution(matrix)
                 if numpy.allclose(x, xe):
                         e = linalg.norm(x -xe) / linalg.norm(xe)
                         results += 'Error: ' + str(e) + '\n'
-                        results += 'Memory occupied: ' + str(mem) + ' B, ' + str(mem / 1024) + ' KiB, ' + str(mem / (1024 ** 2)) + ' MiB\n'
-                        results += 'Elapsed time: ' + str(elapsed) + '\n\n'
+                        results += 'Memory occupied: %.2f B, %.2f KiB, %.2f MiB\n' % (mem, mem / 1024, mem / (1024 ** 2))
+                        results += 'Elapsed time: ' + str(elapsed) + ' s\n\n'
                 else:
                         results += 'Solution is not even close to exact solution' + '\n\n'
+                x = xe = []
                 f = open(os.path.join(RESULTS_DIR, 'python_' + str.lower(platform.system()) + '_result.txt'), 'a')
                 f.write(results)
                 f.close()
+                time.sleep(5)
