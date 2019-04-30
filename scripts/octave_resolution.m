@@ -1,18 +1,22 @@
 clear;
 matrices = cellstr(['Flan_1565'; 'StocF-1465'; 'cfd2'; 'cfd1'; 'G3_circuit'; 'parabolic_fem'; 'apache2'; 'shallow_water1'; 'ex15']);
-fid = fopen('../results/octave_results.txt', 'a');
-fprintf(fid, 'octave_results', 'a');
+if ispc
+  os = 'windows';
+elseif isunix
+  os = 'linux';
+end
+fid = fopen(['..', filesep, 'results', filesep, 'octave_', os, '_results.txt'], 'a');
+fprintf(fid, strcat('octave_', os, '_results'), 'a');
 fclose(fid);
-for i = 1:9
+for i = 1:length(matrices)
   clear -x i matrices;
   matrix_name = matrices{i};
-  if(exist(['../matrices/',  matrix_name, '.mat'], 'file'))
+  if(exist(['..', filesep, 'matrices', filesep, matrix_name, '.mat'], 'file'))
     % load data
-    pause(2);
     t = ctime(time);
     disp('---')
     disp(['Loading matrix ', matrix_name, '...'])
-    load(['../matrices/',  matrix_name, '.mat']); % crea una struct Problem con varie info, tra cui A
+    load(['..', filesep, 'matrices', filesep, matrix_name, '.mat']); % crea una struct Problem con varie info, tra cui A
     disp('Matrix loaded')
 
     % set up vars
@@ -39,7 +43,7 @@ for i = 1:9
       disp(sprintf('Relative error: %d', relative_error))
       disp(sprintf('Memory used: %d Bytes', memory))
       %write to file
-      fid = fopen('../results/octave_results.txt', 'a');
+      fid = fopen(strcat('../results/octave_', os, '_results.txt'), 'a');
       fprintf(fid, '\n\nMatrix name: %s\n', matrix_name);
       fprintf(fid, 'Starting at: %s', t);
       fprintf(fid, 'Elapsed time: %d seconds\n', solv_time);
@@ -52,4 +56,5 @@ for i = 1:9
   else
     disp(['Matrix ', matrix_name, ' not found']);
   endif
+  pause(5);
 endfor

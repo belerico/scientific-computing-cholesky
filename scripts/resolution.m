@@ -2,33 +2,31 @@
 % per lanciare questo script bisogna creare una cartella 'matrices' e
 % metterci dentro le matrici da analizzare
 %%%
-clear
 
-% Test Matrix
-files =  dir('../matrices/');
-pid = feature('getpid')
+function []=resolution(matrix)
+  addpath(genpath(pwd()));
+  if ispc
+    os = 'windows';
+  elseif isunix
+    os = 'linux';
+  end
+  [x, xe, solv_time] = resolve(matrix);
+  if (uint8(x) == xe)
+      e = norm(x - xe) / norm(xe);
+      result = sprintf('Resolving %s\nElapsed time: %d seconds\nRelative error: %d\n\n', matrix, solv_time, e);
+      fid = fopen(['results' filesep 'matlab_' os '_results.txt'], 'a');
+      fprintf(fid, result);
+      fclose(fid);
+  end
+end
 
-for i = 3 : size(files, 1)
-    M = load([files(i).folder, '/', files(i).name]);
-    xe = [];
-    x_sol = [];
-    init_memory = getMemoryUsage(pid);   
-    xe = ones(size(M.Problem.A, 1), 1);
-    b = M.Problem.A * xe;
-
-    %% Solve the system
-    disp('Solving system with Cholesky factorization...')
-    tic
-    x_sol = M.Problem.A \ b;
-    toc
-    ending_memory = getMemoryUsage(pid);
-    disp('Done')
-    %% Check
-    if (uint8(x_sol) == xe)
-        disp([ "La matrice: ", files(i).name])
-        disp("Ok la soluzione e' corretta");
-        e = norm(x_sol - xe) / norm(xe);
-        disp(fprintf("L'errore e' %d", e));
-        disp(fprintf("La memoria usata (in Byte) e' %d", (ending_memory - init_memory)));
-    end
+function [x, xe, solv_time]=resolve(matrix)
+  M = load(['matrices', filesep, matrix]);
+  A = M.Problem.A;
+  clear M; 
+  xe = ones(size(A, 1), 1);
+  b = A * xe;
+  tic;
+  x = A \ b;
+  solv_time = toc;
 end
