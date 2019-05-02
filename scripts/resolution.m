@@ -10,10 +10,12 @@ function []=resolution(matrix)
   elseif isunix
     os = 'linux';
   end
+  init_memory = getMemoryUsage()
   [x, xe, solv_time] = resolve(matrix);
+  ending_memory = getMemoryUsage()
   if (uint8(x) == xe)
       e = norm(x - xe) / norm(xe);
-      result = sprintf('Resolving %s\nElapsed time: %d seconds\nRelative error: %d\n\n', matrix, solv_time, e);
+      result = sprintf('Resolving %s\nElapsed time: %d seconds\nRelative error: %d\nVariables: %d KB\n\n', matrix, solv_time, e, ((ending_memory - init_memory) / 1024));
       fid = fopen(['results' filesep 'matlab_' os '_results.txt'], 'a');
       fprintf(fid, result);
       fclose(fid);

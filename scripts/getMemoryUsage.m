@@ -1,6 +1,6 @@
-function result = getMemoryUsage(pid)
-    r = java.lang.Runtime.getRuntime
-    result = r.totalMemory - r.freeMemory
+function result = getMemoryUsage()
+    r = whos
+    result = sum([r.bytes])
 end
 
 
