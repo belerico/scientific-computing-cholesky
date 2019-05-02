@@ -16,6 +16,7 @@ from sksparse import cholmod
 def resolve(matrix):
         tracemalloc.start()
         A = io.loadmat(matrix)['Problem']['A'][0][0]
+        print('Matrix loaded')
         xe = numpy.ones([A.shape[0], 1])
         b = A * xe 
         start = time.time()

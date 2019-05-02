@@ -11,19 +11,21 @@ OS = platform.system().lower()
 matrices = os.listdir(MATRICES_DIR)
 
 if __name__ == '__main__':
-    for tool in ['python']:
+    for tool in ['python', 'matlab', 'octave']:
         if not(path.exists(path.join(RESULTS_DIR, tool, OS))):
                 os.makedirs(path.join(RESULTS_DIR, tool, OS))
-        for matrix in ['Flan_1565.mat']:
+        for matrix in matrices:
             command = 'mprof run --include-children --interval 0.05 --output ' + path.join(RESULTS_DIR, tool, OS, matrix.split('.')[0] + '.txt') + ' '
-            if tool == 'matlab':
-                # command = 'psrecord "matlab -nodisplay -nosplash -nodesktop -r \\"addpath(genpath(pwd));resolution(\'' + matrix + '\');exit;\\"" '
-                command += 'matlab -nodisplay -nosplash -nodesktop -r "addpath(genpath(\'' + BASE_DIR + '\'));resolution(\'' + matrix + '\');exit;"'
-            elif tool == 'python':
+            if tool == 'python':
                 # command = 'psrecord "python3 ' + path.join(CWD, 'resolution.py') + ' ' + matrix + '" '
                 command += path.join(CWD, 'resolution.py') + ' \
                     ' + path.join(MATRICES_DIR, matrix) + ' \
                     ' + RESULTS_DIR
+            if tool == 'matlab':
+                # command = 'psrecord "matlab -nodisplay -nosplash -nodesktop -r \\"addpath(genpath(pwd));resolution(\'' + matrix + '\');exit;\\"" '
+                command += 'matlab -nodisplay -nosplash -nodesktop -r "addpath(genpath(\'' + BASE_DIR + '\'));resolution(\'' + matrix + '\');exit;"'
+            else:
+                command += 'octave --no-gui --eval "addpath(genpath(\'' + BASE_DIR + '\'));resolution(\'' + matrix + '\');exit;"'
             """ command += '--include-children \
                         --interval 0.05 \
                         --log ' + path.join(RESULTS_DIR, tool, OS, matrix.split('.')[0] + '.txt') """
