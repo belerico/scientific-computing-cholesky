@@ -2,7 +2,7 @@ import os
 from os import path
 import platform
 import subprocess
-from download_matrices import download_matrices
+from scientific-computing-cholesky.download_matrices import download_matrices
 from scripts.get_statistics import get_statistics
 
 CWD = path.dirname(path.abspath(__file__))
