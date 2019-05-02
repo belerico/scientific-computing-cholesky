@@ -3,7 +3,7 @@
 % metterci dentro le matrici da analizzare
 %%%
 
-function []=resolution(matrix)
+function []=resolution(matrix, IDE)
   % addpath(genpath(pwd()));
   [x, xe, solv_time, mem] = resolve(matrix);
   if ispc
@@ -14,7 +14,7 @@ function []=resolution(matrix)
   if (uint8(x) == xe)
       e = norm(x - xe) / norm(xe);
       result = sprintf(['Resolving %s\nError: %d\nElapsed time: ' num2str(solv_time) ' seconds\nOccupied memory: %.2f MB\n\n'], matrix, e, mem / (1024 ^ 2));
-      fid = fopen(['results' filesep 'matlab_' os '_results.txt'], 'a');
+      fid = fopen(['results' filesep IDE '_' os '_results.txt'], 'a');
       fprintf(fid, result);
       fclose(fid);
   end

@@ -23,9 +23,9 @@ if __name__ == '__main__':
                     ' + RESULTS_DIR
             elif tool == 'matlab':
                 # command = 'psrecord "matlab -nodisplay -nosplash -nodesktop -r \\"addpath(genpath(pwd));resolution(\'' + matrix + '\');exit;\\"" '
-                command += 'matlab -nodisplay -nosplash -nodesktop -r "addpath(genpath(\'' + BASE_DIR + '\'));resolution(\'' + matrix + '\');exit;"'
+                command += 'matlab -nodisplay -nosplash -nodesktop --nojvm -r "addpath(genpath(\'' + BASE_DIR + '\'));resolution(\'' + matrix + '\', \'matlab\');exit;"'
             else:
-                command += 'octave --no-gui --eval "addpath(genpath(\'' + BASE_DIR + '\'));resolution(\'' + matrix + '\');"'
+                command += 'octave --no-gui --eval "addpath(genpath(\'' + BASE_DIR + '\'));resolution(\'' + matrix + '\', \'octave\');"'
             """ command += '--include-children \
                         --interval 0.05 \
                         --log ' + path.join(RESULTS_DIR, tool, OS, matrix.split('.')[0] + '.txt') """
