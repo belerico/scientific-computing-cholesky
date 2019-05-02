@@ -21,11 +21,11 @@ if __name__ == '__main__':
                 command += path.join(CWD, 'resolution.py') + ' \
                     ' + path.join(MATRICES_DIR, matrix) + ' \
                     ' + RESULTS_DIR
-            if tool == 'matlab':
+            elif tool == 'matlab':
                 # command = 'psrecord "matlab -nodisplay -nosplash -nodesktop -r \\"addpath(genpath(pwd));resolution(\'' + matrix + '\');exit;\\"" '
                 command += 'matlab -nodisplay -nosplash -nodesktop -r "addpath(genpath(\'' + BASE_DIR + '\'));resolution(\'' + matrix + '\');exit;"'
             else:
-                command += 'octave --no-gui --eval "addpath(genpath(\'' + BASE_DIR + '\'));resolution(\'' + matrix + '\');exit;"'
+                command += 'octave --no-gui --eval "addpath(genpath(\'' + BASE_DIR + '\'));resolution(\'' + matrix + '\');"'
             """ command += '--include-children \
                         --interval 0.05 \
                         --log ' + path.join(RESULTS_DIR, tool, OS, matrix.split('.')[0] + '.txt') """
