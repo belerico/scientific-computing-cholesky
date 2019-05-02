@@ -2,7 +2,6 @@ import os
 from os import path
 import platform
 import subprocess
-from scientific-computing-cholesky.download_matrices import download_matrices
 from scripts.get_statistics import get_statistics
 
 CWD = path.dirname(path.abspath(__file__))
@@ -13,7 +12,6 @@ OS = platform.system().lower()
 matrices = sorted(os.listdir(MATRICES_DIR), key=str.lower)
 
 if __name__ == '__main__':
-    download_matrices()
     for tool in ['python', 'matlab', 'octave']:
         if not(path.exists(path.join(RESULTS_DIR, tool, OS))):
                 os.makedirs(path.join(RESULTS_DIR, tool, OS))
