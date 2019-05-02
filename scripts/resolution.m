@@ -4,7 +4,7 @@
 %%%
 
 function []=resolution(matrix)
-  addpath(genpath(pwd()));
+  % addpath(genpath(pwd()));
   if ispc
     os = 'windows';
   elseif isunix
