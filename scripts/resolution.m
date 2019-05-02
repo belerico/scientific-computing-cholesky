@@ -5,24 +5,28 @@
 
 function []=resolution(matrix)
   % addpath(genpath(pwd()));
+  [x, xe, solv_time, mem] = resolve(matrix);
   if ispc
     os = 'windows';
   elseif isunix
     os = 'linux';
   end
-  init_memory = getMemoryUsage()
-  [x, xe, solv_time] = resolve(matrix);
-  ending_memory = getMemoryUsage()
   if (uint8(x) == xe)
       e = norm(x - xe) / norm(xe);
-      result = sprintf('Resolving %s\nElapsed time: %d seconds\nRelative error: %d\nVariables: %d KB\n\n', matrix, solv_time, e, ((ending_memory - init_memory) / 1024));
+      result = sprintf('Resolving %s\nElapsed time: %d seconds\nRelative error: %d\nVariables: %.2f KB %.2f MB\n\n', matrix, solv_time, e, mem / 1024, mem / (1024 ^ 2));
       fid = fopen(['results' filesep 'matlab_' os '_results.txt'], 'a');
       fprintf(fid, result);
       fclose(fid);
   end
 end
 
-function [x, xe, solv_time]=resolve(matrix)
+function [x, xe, solv_time, mem]=resolve(matrix)
+  % Compute memory before cholesky decomposition
+  vars = whos;
+  init_memory = 0; 
+  for i = 1:length(vars)
+      init_memory = init_memory + vars(i).bytes;
+  end
   M = load(['matrices', filesep, matrix]);
   A = M.Problem.A;
   clear M; 
@@ -30,5 +34,12 @@ function [x, xe, solv_time]=resolve(matrix)
   b = A * xe;
   tic;
   x = A \ b;
+  % Compute memory after cholesky decomposition
+  vars = whos;
+  ending_memory = 0; 
+  for i = 1:length(vars)
+    ending_memory = ending_memory + vars(i).bytes;
+  end
   solv_time = toc;
+  mem = ending_memory - init_memory;
 end
