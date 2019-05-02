@@ -7,7 +7,8 @@ clear
 % Test Matrix
 files =  dir('../matrices/');
 pid = feature('getpid')
-
+plt = computer
+fid = fopen([plt, "_matlab_var.txt"], 'w')
 for i = 3 : size(files, 1)
     M = load([files(i).folder, '/', files(i).name]);
     xe = [];
@@ -26,6 +27,7 @@ for i = 3 : size(files, 1)
     %% Check
     if (uint8(x_sol) == xe)
         disp([ "La matrice: ", files(i).name])
+  
         disp("Ok la soluzione e' corretta");
         e = norm(x_sol - xe) / norm(xe);
         disp(fprintf("L'errore e' %d", e));
