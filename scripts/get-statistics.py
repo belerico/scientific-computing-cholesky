@@ -9,7 +9,7 @@ OS = platform.system().lower()
 matrices = os.listdir(MATRICES_DIR)
 
 if __name__ == '__main__':
-    for tool in ['python']:
+    for tool in ['python', 'matlab']:
         if not(os.path.exists(os.path.join(RESULTS_DIR, tool, OS))):
                 os.makedirs(os.path.join(RESULTS_DIR, tool, OS))
         for matrix in matrices:
