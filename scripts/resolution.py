@@ -34,7 +34,7 @@ if __name__ == '__main__':
                 :param str sys.argv[2]: Results dir to write results per matrix
         """
         matrix = sys.argv[1]
-        results = 'Resolving ' + matrix + '\n'
+        results = 'Resolving ' + os.path.basename(matrix) + '\n'
         xe, x, elapsed, mem = resolve(matrix)
         if numpy.allclose(x, xe):
                 e = linalg.norm(x -xe) / linalg.norm(xe)
