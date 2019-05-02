@@ -2,3 +2,5 @@
 *.mat
 ./matrices/*
 .vscode
+results/matlab/*
+results/python/*
