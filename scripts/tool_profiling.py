@@ -2,6 +2,8 @@ import os
 from os import path
 import platform
 import subprocess
+from download_matrices import download_matrices
+from scripts.get_statistics import get_statistics
 
 CWD = path.dirname(path.abspath(__file__))
 BASE_DIR = path.normpath(path.join(CWD, '..', '.'))
@@ -11,6 +13,7 @@ OS = platform.system().lower()
 matrices = sorted(os.listdir(MATRICES_DIR), key=str.lower)
 
 if __name__ == '__main__':
+    download_matrices()
     for tool in ['python', 'matlab', 'octave']:
         if not(path.exists(path.join(RESULTS_DIR, tool, OS))):
                 os.makedirs(path.join(RESULTS_DIR, tool, OS))
@@ -30,3 +33,5 @@ if __name__ == '__main__':
                         --interval 0.05 \
                         --log ' + path.join(RESULTS_DIR, tool, OS, matrix.split('.')[0] + '.txt') """
             proc = subprocess.call(command, shell=True)
+    get_statistics(BASE_DIR, RESULTS_DIR)
+    

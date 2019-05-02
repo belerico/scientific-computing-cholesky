@@ -53,7 +53,7 @@ def download_with_resume(url, file_path):
         elif file_size == -1:
             raise Exception('Error getting Content-Length from server: %s' % url)
 
-if __name__ == '__main__':
+def download_matrices():
     if not os.path.exists('matrices.txt'):
         raise Exception('Missing matrices.txt file')
     with open('matrices.txt', 'r') as f:
@@ -66,3 +66,6 @@ if __name__ == '__main__':
         filename = filename.strip('\n')
         url = 'https://sparse.tamu.edu/mat/' + filename
         download_with_resume(url, 'matrices/' + filename.split('/')[1])
+
+if __name__ == '__main__':
+    download_matrices()

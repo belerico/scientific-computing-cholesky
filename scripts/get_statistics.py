@@ -2,11 +2,7 @@ import os
 from os import path
 from pandas import pandas
 
-CWD = path.dirname(path.abspath(__file__))
-BASE_DIR = path.normpath(path.join(CWD, '..', '.'))
-RESULTS_DIR = path.join(BASE_DIR, 'results')
-
-if __name__ == '__main__':
+def get_statistics(BASE_DIR, RESULTS_DIR):
     final_report = pandas.DataFrame(columns=['Tool', 'OS', 'Matrix', 'Relative error', 'Elapsed time', 'Mem', 'Min mem', 'Max mem', 'Avg mem'])
     profiler_report_row = 0
     for root, subdirs, files in os.walk(RESULTS_DIR):
@@ -39,4 +35,9 @@ if __name__ == '__main__':
                 report = pandas.read_csv(pathname, sep=' ', usecols=[1], skiprows=1, header=None)
                 final_report.loc[profiler_report_row, list(['Min mem', 'Max mem', 'Avg mem'])] = [float(report.min()), float(report.max()), float(report.mean())]
                 profiler_report_row += 1
-    print(final_report.head(n = 15))
+    final_report.to_csv(path.join(BASE_DIR, 'final-report.csv'), sep=';')
+
+if __name__ == '__main__':
+    BASE_DIR = path.normpath(path.join(path.dirname(path.abspath(__file__)), '..', '.'))
+    RESULTS_DIR = path.join(BASE_DIR, 'results')
+    get_statistics(BASE_DIR, RESULTS_DIR)
