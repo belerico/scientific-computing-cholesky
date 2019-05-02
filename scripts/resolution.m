@@ -13,7 +13,7 @@ function []=resolution(matrix, IDE)
   end
   if (uint8(x) == xe)
       e = norm(x - xe) / norm(xe);
-      result = sprintf(['Resolving %s\nError: %d\nElapsed time: ' num2str(solv_time) ' seconds\nOccupied memory: %.2f MB\n\n'], matrix, e, mem / (1024 ^ 2));
+      result = sprintf(['Resolving %s\nError: %d\nElapsed time: %.16f s\nOccupied memory: %.2f MB\n\n'], matrix, e, solv_time, mem / (1024 ^ 2));
       fid = fopen(['results' filesep IDE '_' os '_results.txt'], 'a');
       fprintf(fid, result);
       fclose(fid);
