@@ -2,3 +2,4 @@ numpy
 scikit-sparse
 scikit-learn
 memory_profiler
+pandas
