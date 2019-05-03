@@ -2,3 +2,8 @@ matrices
 results
 venv
 .vscode
+__pycache__
+build
+dist
+scientific_computing_chol.egg-info
+

@@ -7,11 +7,8 @@ import tracemalloc
 from scipy import io
 from scipy import linalg
 from sksparse import cholmod
+from definitions import RESULTS_DIR
 
-# CWD = os.path.dirname(os.path.abspath(__file__))
-# MATRICES_DIR = os.path.join(CWD, '..', 'matrices')
-# RESULTS_DIR = os.path.join(CWD, '..', 'results')
-# matrices = os.listdir(MATRICES_DIR)
 
 def resolve(matrix):
         tracemalloc.start()
@@ -28,10 +25,10 @@ def resolve(matrix):
         elapsed = end - start
         return xe, x, elapsed, mem
 
+
 if __name__ == '__main__':
         """
                 :param str sys.argv[1]: Matrix path to be loaded
-                :param str sys.argv[2]: Results dir to write results per matrix
         """
         matrix = sys.argv[1]
         results = 'Resolving ' + os.path.basename(matrix) + '\n'
@@ -43,6 +40,6 @@ if __name__ == '__main__':
                 results += 'Occupied memory: %.2f MiB\n\n' % (mem / (1024 ** 2))
         else:
                 results += 'Solution is not even close to exact solution' + '\n\n'
-        f = open(os.path.join(sys.argv[2], 'python_' + str.lower(platform.system()) + '_result.txt'), 'a')
+        f = open(os.path.join(RESULTS_DIR, 'python_' + str.lower(platform.system()) + '_result.txt'), 'a')
         f.write(results)
         f.close()

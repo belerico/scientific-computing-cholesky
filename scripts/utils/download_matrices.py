@@ -3,6 +3,8 @@ import requests
 import shutil
 import sys
 import time
+from definitions import BASE_DIR, MATRICES_DIR
+
 
 def download_with_resume(url, file_path):
     # Don't download if the file exists
@@ -53,19 +55,21 @@ def download_with_resume(url, file_path):
         elif file_size == -1:
             raise Exception('Error getting Content-Length from server: %s' % url)
 
+
 def download_matrices():
-    if not os.path.exists('matrices.txt'):
+    if not os.path.exists(os.path.join(BASE_DIR, 'matrices.txt')):
         raise Exception('Missing matrices.txt file')
-    with open('matrices.txt', 'r') as f:
+    with open(os.path.join(BASE_DIR, 'matrices.txt'), 'r') as f:
         filenames = f.readlines()
         f.close()
-    if not os.path.exists('./matrices'):
+    if not os.path.exists(MATRICES_DIR):
         print('Creating dir for storing matrices')
-        os.makedirs('./matrices')
+        os.makedirs(MATRICES_DIR)
     for filename in filenames:
         filename = filename.strip('\n')
         url = 'https://sparse.tamu.edu/mat/' + filename
-        download_with_resume(url, 'matrices/' + filename.split('/')[1])
+        download_with_resume(url, os.path.join(MATRICES_DIR, filename.split('/')[1]))
+
 
 if __name__ == '__main__':
     download_matrices()
