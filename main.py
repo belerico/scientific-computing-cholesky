@@ -3,22 +3,17 @@ import os
 from os import path
 import platform
 import subprocess
-from utils.download_matrices import download_matrices
-from utils.get_statistics import get_statistics
-from definitions import *
-
-# CWD = path.dirname(path.abspath(__file__))
-# BASE_DIR = path.normpath(path.join(CWD, '..', '.'))
-# MATRICES_DIR = path.join(BASE_DIR, 'matrices')
-# RESULTS_DIR = path.join(BASE_DIR, 'results')
+from scripts.utils.download_matrices import download_matrices
+from scripts.utils.get_statistics import get_statistics
+from scripts.definitions import *
 
 OS = platform.system().lower()
-matrices = sorted(os.listdir(MATRICES_DIR), key=str.lower)
 parser = argparse.ArgumentParser()
 parser.add_argument('-d', '--download-matrices', help='download required matrices', action='store_true')
 args = parser.parse_args()
 if args.download_matrices:
     download_matrices()
+matrices = sorted(os.listdir(MATRICES_DIR), key=str.lower)
 for tool in ['python', 'matlab', 'octave']:
     if not(path.exists(path.join(RESULTS_DIR, tool, OS))):
             os.makedirs(path.join(RESULTS_DIR, tool, OS))

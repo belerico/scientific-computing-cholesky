@@ -3,7 +3,7 @@ import requests
 import shutil
 import sys
 import time
-from definitions import BASE_DIR, MATRICES_DIR
+from scripts.definitions import BASE_DIR, MATRICES_DIR
 
 
 def download_with_resume(url, file_path):
@@ -57,9 +57,9 @@ def download_with_resume(url, file_path):
 
 
 def download_matrices():
-    if not os.path.exists(os.path.join(BASE_DIR, 'matrices.txt')):
+    if not os.path.exists(os.path.join(BASE_DIR, 'data', 'matrices.txt')):
         raise Exception('Missing matrices.txt file')
-    with open(os.path.join(BASE_DIR, 'matrices.txt'), 'r') as f:
+    with open(os.path.join(BASE_DIR, 'data', 'matrices.txt'), 'r') as f:
         filenames = f.readlines()
         f.close()
     if not os.path.exists(MATRICES_DIR):

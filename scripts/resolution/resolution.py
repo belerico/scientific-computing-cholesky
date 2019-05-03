@@ -7,7 +7,7 @@ import tracemalloc
 from scipy import io
 from scipy import linalg
 from sksparse import cholmod
-from definitions import RESULTS_DIR
+from scripts.definitions import RESULTS_DIR
 
 
 def resolve(matrix):

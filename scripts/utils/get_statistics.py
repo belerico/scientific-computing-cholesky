@@ -1,7 +1,7 @@
 import os
 from os import path
 from pandas import pandas
-from definitions import BASE_DIR, RESULTS_DIR
+from scripts.definitions import BASE_DIR, RESULTS_DIR
 
 def get_statistics():
     final_report = pandas.DataFrame(columns=['Tool', 'OS', 'Matrix', 'Relative error', 'Elapsed time', 'Mem', 'Min mem', 'Max mem', 'Avg mem', 'Delta mem'])
@@ -37,7 +37,6 @@ def get_statistics():
                 final_report.loc[profiler_report_row, list(['Min mem', 'Max mem', 'Avg mem', 'Delta mem'])] = [float(report.min()), float(report.max()), float(report.mean()), float(report.max() - report.min())]
                 profiler_report_row += 1
     final_report.to_csv(path.join(BASE_DIR, 'final-report.csv'), sep=';')
-
 
 if __name__ == '__main__':
     get_statistics()
