@@ -1,5 +1,4 @@
-*.part
-*.mat
-./matrices/*
+matrices
+results
+venv
 .vscode
-results/*
