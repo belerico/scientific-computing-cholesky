@@ -38,6 +38,6 @@ for tool in ['python', 'matlab', 'octave']:
                         --eval "addpath(genpath(\'' + BASE_DIR + '\')); \
                             cd \'' + BASE_DIR + '\'; \
                             resolution(\'' + matrix + '\', \'octave\');"'
-        proc = subprocess.call(command, shell=True)
+        subprocess.run(command, shell=True)
 get_statistics()
     
