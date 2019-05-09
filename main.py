@@ -33,7 +33,7 @@ for tool in ['python', 'matlab', 'octave']:
                             resolution(\'' + matrix + '\', \'matlab\'); \
                             exit;"'
         else:
-            command += 'octave \
+            command += 'octave-cli \
                         --no-gui \
                         --eval "addpath(genpath(\'' + BASE_DIR + '\')); \
                             cd \'' + BASE_DIR + '\'; \
