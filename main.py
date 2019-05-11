@@ -25,6 +25,7 @@ for tool in ['python', 'matlab', 'octave']:
         elif tool == 'matlab':
             # command = 'psrecord "matlab -nodisplay -nosplash -nodesktop -r \\"addpath(genpath(pwd));resolution(\'' + matrix + '\');exit;\\"" '
             command += 'matlab \
+                        -wait \
                         -nodisplay \
                         -nosplash \
                         -nodesktop \
