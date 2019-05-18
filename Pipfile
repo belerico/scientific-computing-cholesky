@@ -11,6 +11,7 @@ pandas = "*"
 scipy = "*"
 scikit-sparse = "*"
 memory-profiler = "*"
+tqdm = "*"
 
 [requires]
 python_version = "3.7"
