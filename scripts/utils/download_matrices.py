@@ -1,8 +1,6 @@
 import os
 import requests
 import shutil
-import sys
-import time
 from tqdm import tqdm
 from scripts.definitions import BASE_DIR, MATRICES_DIR
 
@@ -23,7 +21,6 @@ def download_with_resume(url, destination):
         print('\nFile size is %.1fMB' % (file_size / block_size))
         # Set headers to resume download from where we've left 
         headers = {"Range": "bytes=%s-" % first_byte}
-        start = time.time()
         r = requests.get(url, headers=headers, stream=True)
         with tqdm(initial=first_byte, total=file_size, unit='bit', unit_scale=True) as pbar:
             with open(tmp_file_path, file_mode) as f:
