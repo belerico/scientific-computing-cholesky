@@ -5,6 +5,11 @@ from tqdm import tqdm
 from scripts.definitions import BASE_DIR, MATRICES_DIR
 
 def download_with_resume(url, destination):
+    # Check if the requested url is ok, i.e. 200 <= status_code < 400
+    head = requests.head(url)
+    if not head.ok:
+        head.raise_for_status()
+
     # Since requests doesn't support local file reading
     # we check if protocol is file://
     if url.startswith('file://'):
@@ -14,21 +19,22 @@ def download_with_resume(url, destination):
             return
         else:
             raise Exception('File not found at %s' % url_no_protocol)
-
+    
     # Don't download if the file exists
-    if os.path.exists(destination):
+    if os.path.exists(os.path.expanduser(destination)):
         print('File already exists, no need to download')
         return
 
     tmp_file = destination + '.part'
     first_byte = os.path.getsize(tmp_file) if os.path.exists(tmp_file) else 0
-    chunk_size = 1024 ** 2
+    chunk_size = 1024 ** 2  # 1 MB
     file_mode = 'ab' if first_byte else 'wb'
+
     # Set headers to resume download from where we've left 
     headers = {"Range": "bytes=%s-" % first_byte}
     r = requests.get(url, headers=headers, stream=True)
-    file_size = int(r.headers.get('Content-length', 0))
-    if file_size != 0:
+    file_size = int(r.headers.get('Content-length', -1))
+    if file_size >= 0:
         # Content-length set
         file_size += first_byte
         total = file_size
@@ -37,12 +43,9 @@ def download_with_resume(url, destination):
         print('Cannot retrieve Content-length from server')
         total = None
 
-    if file_size < 0:
-        raise Exception('Error getting file from server: %s' % url)
-
     print('Download from ' + url)
-    print('Starting download at %.1fMB' % (first_byte / chunk_size))
-    print('File size is %.1fMB' % (file_size / chunk_size))
+    print('Starting download at %.1fMB' % (first_byte / (10 ** 6)))
+    print('File size is %.1fMB' % (file_size / (10 ** 6)))
 
     with tqdm(initial=first_byte, total=total, unit_scale=True) as pbar:
         with open(tmp_file, file_mode) as f:
@@ -67,7 +70,6 @@ def download_matrices():
         filename = filename.strip('\n')
         url = 'https://sparse.tamu.edu/mat/' + filename
         download_with_resume(url, os.path.join(MATRICES_DIR, filename.split('/')[1]))
-
 
 if __name__ == '__main__':
     download_matrices()
