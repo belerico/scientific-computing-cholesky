@@ -3,9 +3,9 @@ import os
 from os import path
 import platform
 import subprocess
+from scripts.definitions import *
 from scripts.utils.download_matrices import download_matrices
 from scripts.utils.get_statistics import get_statistics
-from scripts.definitions import *
 
 OS = platform.system().lower()
 parser = argparse.ArgumentParser()
@@ -18,7 +18,10 @@ for tool in ['python', 'matlab', 'octave']:
     if not(path.exists(path.join(RESULTS_DIR, tool, OS))):
             os.makedirs(path.join(RESULTS_DIR, tool, OS))
     for matrix in matrices:
-        command = 'mprof run --include-children --interval 0.05 --output ' + path.join(RESULTS_DIR, tool, OS, matrix.split('.')[0] + '.txt') + ' '
+        command = 'mprof run \
+                    --include-children \
+                    --interval 0.05 \
+                    --output ' + path.join(RESULTS_DIR, tool, OS, matrix.split('.')[0] + '.txt') + ' '
         if tool == 'python':
             # command = 'psrecord "python3 ' + path.join(CWD, 'resolution.py') + ' ' + matrix + '" '
             command += path.join(BASE_DIR, 'scripts', 'resolution', 'resolution.py') + ' ' + path.join(MATRICES_DIR, matrix)
@@ -39,6 +42,6 @@ for tool in ['python', 'matlab', 'octave']:
                         --eval "addpath(genpath(\'' + BASE_DIR + '\')); \
                             cd \'' + BASE_DIR + '\'; \
                             resolution(\'' + matrix + '\', \'octave\');"'
-        subprocess.run(command, shell=True)
+        subprocess.call(command, shell=True)
 get_statistics()
     

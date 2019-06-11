@@ -3,43 +3,63 @@ import sys
 import time
 import numpy
 import platform
-import tracemalloc
-from scipy import io
-from scipy import linalg
-from sksparse import cholmod
-from scripts.definitions import RESULTS_DIR
+from scipy import io, linalg
+from cvxopt import cholmod, matrix, sparse
+from cvxpy.interface import matrix_utilities
+from memory_profiler import profile
+from scripts.definitions import RESULTS_DIR, LOGS_DIR
 
+matrix_path = sys.argv[1]
+matrix_name = os.path.basename(matrix_path).split('.')[0]
+if not os.path.exists(LOGS_DIR):
+        os.makedirs(LOGS_DIR)
+log = open(os.path.join(LOGS_DIR, matrix_name + '.log'), 'w+')
 
-def resolve(matrix):
-        tracemalloc.start()
-        A = io.loadmat(matrix)['Problem']['A'][0][0]
-        xe = numpy.ones([A.shape[0], 1])
-        b = A * xe 
+def read_mem(path: str, line: int, column: int):
+        line = open(path).readlines()[line]
+        return line.split()[column]
+
+@profile(stream=log)
+def resolve(matrix_path):
+        A = io.loadmat(matrix_path)['Problem']['A'][0][0]
+        # Convert a scipy csc_matrix into a cvxopt sparse matrix
+        A = matrix_utilities.sparse2cvxopt(A)
+        xe = matrix(numpy.ones([A.size[0], 1]))
+        b = sparse(A * xe)
         start = time.time()
-        factor = cholmod.cholesky(A)
-        x = factor(b)
+        # scikit-sparse
+        # factor = cholmod.cholesky(A)
+        # x = factor(b)
+
+        # linalg
+        # factor = linalg.cholesky(A.todense())
+        # x = linalg.cho_solve((factor, False), b)
+
+        # cvxopt
+        x = cholmod.splinsolve(A,b)
         end = time.time()
-        snapshot = tracemalloc.take_snapshot()
-        stats = snapshot.statistics('lineno')
-        mem = sum(stat.size for stat in stats)
         elapsed = end - start
-        return xe, x, elapsed, mem
+        return xe, x, elapsed
 
 
 if __name__ == '__main__':
         """
                 :param str sys.argv[1]: Matrix path to be loaded
         """
-        matrix = sys.argv[1]
-        results = 'Resolving ' + os.path.basename(matrix) + '\n'
-        xe, x, elapsed, mem = resolve(matrix)
-        if numpy.allclose(x, xe):
-                e = linalg.norm(x -xe) / linalg.norm(xe)
-                results += 'Error: ' + str(e) + '\n'
-                results += 'Elapsed time: ' + str(elapsed) + ' s\n'
-                results += 'Occupied memory: %.2f MiB\n\n' % (mem / (1024 ** 2))
-        else:
-                results += 'Solution is not even close to exact solution' + '\n\n'
+        results = 'Resolving ' + matrix_name + ' matrix\n'
+        xe, x, elapsed = resolve(matrix_path)
+        log.flush()
+        log.close()
+        mem = read_mem(os.path.join(LOGS_DIR, matrix_name + '.log'), 6, 3)
+        # if numpy.allclose(x, xe):
+        rel_err = linalg.norm(x - xe) / linalg.norm(xe)
+        
+        results += 'Relative error: ' + str(rel_err) + '\n'
+        results += 'Elapsed time: ' + str(elapsed) + ' s\n'
+        results += 'Occupied memory: %.2f MiB\n\n' % float(mem)
+        # else:
+        #         results += 'Solution is not even close to exact solution' + '\n\n'
         f = open(os.path.join(RESULTS_DIR, 'python_' + str.lower(platform.system()) + '_result.txt'), 'a')
         f.write(results)
+        f.flush()
         f.close()

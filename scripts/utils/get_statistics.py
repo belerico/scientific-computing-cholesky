@@ -24,7 +24,7 @@ def get_statistics():
                     if i_row % 5 == 0:
                         final_report.loc[int(i_row / 5 + script_report_row * (len(lines) / 5)), list(['Tool', 'OS', 'Matrix'])] = [splitted_name[1], splitted_name[0], row[1].rstrip()]
                     elif i_row % 5 == 1:    
-                        final_report.loc[int(i_row / 5 + script_report_row * (len(lines) / 5)), 'Relative error'] = row[1].rstrip()
+                        final_report.loc[int(i_row / 5 + script_report_row * (len(lines) / 5)), 'Relative error'] = row[2].rstrip()
                     elif i_row % 5 == 2:    
                         final_report.loc[int(i_row / 5 + script_report_row * (len(lines) / 5)), 'Elapsed time'] = row[2].rstrip()
                     elif i_row % 5 == 3:    

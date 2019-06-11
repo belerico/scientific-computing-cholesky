@@ -12,6 +12,9 @@ scipy = "*"
 scikit-sparse = "*"
 memory-profiler = "*"
 tqdm = "*"
+cvxopt = "*"
+cvxpy = "*"
+pylint = "*"
 
 [requires]
 python_version = "3.7"
