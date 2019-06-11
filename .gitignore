@@ -107,7 +107,8 @@ venv.bak/
 ceneje_data/
 
 .vscode/
+logs
 matrices
 results
-final-report.csv
+final-report_*.csv
 

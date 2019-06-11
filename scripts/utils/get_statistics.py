@@ -1,4 +1,5 @@
 import os
+import platform
 from os import path
 from pandas import pandas
 from scripts.definitions import BASE_DIR, RESULTS_DIR
@@ -36,7 +37,7 @@ def get_statistics():
                 report = pandas.read_csv(pathname, sep=' ', usecols=[1], skiprows=1, header=None)
                 final_report.loc[profiler_report_row, list(['Min mem', 'Max mem', 'Avg mem', 'Delta mem'])] = [float(report.min()), float(report.max()), float(report.mean()), float(report.max() - report.min())]
                 profiler_report_row += 1
-    final_report.to_csv(path.join(BASE_DIR, 'final-report.csv'), sep=';')
+    final_report.to_csv(path.join(BASE_DIR, 'final-report_' + str.lower(platform.system()) + '.csv'), sep=';')
 
 if __name__ == '__main__':
     get_statistics()

@@ -14,7 +14,7 @@ args = parser.parse_args()
 if args.download_matrices:
     download_matrices()
 matrices = sorted(os.listdir(MATRICES_DIR), key=str.lower)
-for tool in ['python', 'matlab', 'octave']:
+for tool in ['python']:
     if not(path.exists(path.join(RESULTS_DIR, tool, OS))):
             os.makedirs(path.join(RESULTS_DIR, tool, OS))
     for matrix in matrices:
@@ -42,6 +42,7 @@ for tool in ['python', 'matlab', 'octave']:
                         --eval "addpath(genpath(\'' + BASE_DIR + '\')); \
                             cd \'' + BASE_DIR + '\'; \
                             resolution(\'' + matrix + '\', \'octave\');"'
-        subprocess.call(command, shell=True)
+        cmd = subprocess.Popen(command, shell=True)
+        cmd.communicate()
 get_statistics()
     
