@@ -15,9 +15,17 @@ if not os.path.exists(LOGS_DIR):
         os.makedirs(LOGS_DIR)
 log = open(os.path.join(LOGS_DIR, matrix_name + '.log'), 'w+')
 
-def read_mem(path: str, line: int, column: int):
-        line = open(path).readlines()[line]
-        return line.split()[column]
+def read_mem(path: str, line_from: int, line_to: int, column: int):
+        assert(line_to >= line_from)
+        assert(column >= 0)
+        lines = open(path).readlines()[line_from:line_to]
+        mem = 0
+        for line in lines:
+                splitted_line = line.split()
+                # Do not consider empty lines and those commented out
+                if len(splitted_line) > 1 and splitted_line[1] != '#':
+                        mem += float(splitted_line[column])
+        return mem
 
 @profile(stream=log)
 def resolve(matrix_path):
@@ -50,13 +58,12 @@ if __name__ == '__main__':
         xe, x, elapsed = resolve(matrix_path)
         log.flush()
         log.close()
-        mem = read_mem(os.path.join(LOGS_DIR, matrix_name + '.log'), 6, 3)
+        mem = read_mem(os.path.join(LOGS_DIR, matrix_name + '.log'), 6, 22, 3)
         # if numpy.allclose(x, xe):
         rel_err = linalg.norm(x - xe) / linalg.norm(xe)
-        
         results += 'Relative error: ' + str(rel_err) + '\n'
         results += 'Elapsed time: ' + str(elapsed) + ' s\n'
-        results += 'Occupied memory: %.2f MiB\n\n' % float(mem)
+        results += 'Occupied memory: %.2f MiB\n\n' % mem
         # else:
         #         results += 'Solution is not even close to exact solution' + '\n\n'
         f = open(os.path.join(RESULTS_DIR, 'python_' + str.lower(platform.system()) + '_result.txt'), 'a')

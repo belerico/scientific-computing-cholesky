@@ -3,7 +3,7 @@ import os
 from os import path
 import platform
 import subprocess
-from scripts.definitions import *
+from scripts.definitions import BASE_DIR, MATRICES_DIR, RESULTS_DIR
 from scripts.utils.download_matrices import download_matrices
 from scripts.utils.get_statistics import get_statistics
 
