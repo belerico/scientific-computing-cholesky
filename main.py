@@ -47,7 +47,7 @@ for tool in ['python', 'octave', 'matlab']:
         command = 'python ' + path.join(SCRIPTS_DIR, 'record.py') + ' \
                     --include-children \
                     --log ' + path.join(args.output, tool, OS, matrix.split('.')[0] + '.txt') + ' \
-                    --interval ' + args.interval + ' s'
+                    --interval ' + args.interval + ' '
         if tool == 'python':
             command += '"python ' + path.join(SCRIPTS_DIR, 'resolution', 'resolution.py') + ' ' + path.join(MATRICES_DIR, matrix) + '"'
             # command += path.join(BASE_DIR, 'scripts', 'resolution', 'resolution.py') + ' ' + path.join(MATRICES_DIR, matrix)
