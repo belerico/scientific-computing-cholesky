@@ -2,7 +2,9 @@ import os
 import requests
 import shutil
 from tqdm import tqdm
-from scripts.definitions import BASE_DIR, MATRICES_DIR
+if __name__ == "__main__" and __package__ is None:
+    __package__ = "scripts.utils.download_matrices"
+from ..definitions import BASE_DIR, MATRICES_DIR
 
 def download_with_resume(url, destination):
     # Check if the requested url is ok, i.e. 200 <= status_code < 400

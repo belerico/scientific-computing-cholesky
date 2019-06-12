@@ -3,7 +3,9 @@ import sys
 import platform
 from os import path
 from pandas import pandas
-from scripts.definitions import BASE_DIR
+if __name__ == "__main__" and __package__ is None:
+    __package__ = "scripts.utils.get_statistics"
+from ..definitions import BASE_DIR
 
 def get_statistics(results_path):
     final_report = pandas.DataFrame(columns=['Tool', 'OS', 'Matrix', 'Relative error', 'Elapsed time', 'Mem', 'Min mem', 'Max mem', 'Avg mem', 'Delta mem'])

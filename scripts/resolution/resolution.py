@@ -7,11 +7,9 @@ from scipy import io, linalg
 from cvxopt import cholmod, matrix, sparse
 from cvxpy.interface import matrix_utilities
 from memory_profiler import profile
-try:
-        from scripts.definitions import RESULTS_DIR, LOGS_DIR
-except ModuleNotFoundError:
-        sys.path.append(os.path.join(os.getcwd(), 'scripts', 'definitions'))
-        from definitions import RESULTS_DIR, LOGS_DIR
+if __name__ == "__main__" and __package__ is None:
+    __package__ = "scripts.resolution.resolution"
+from ..definitions import RESULTS_DIR, LOGS_DIR
 
 matrix_path = sys.argv[1]
 matrix_name = os.path.basename(matrix_path).split('.')[0]
