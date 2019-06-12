@@ -53,7 +53,7 @@ for tool in ['python', 'octave', 'matlab']:
                     --log ' + path.join(args.output, tool, OS, matrix.split('.')[0] + '.txt') + ' \
                     --interval ' + args.interval + ' '
         if tool == 'python':
-            command += '"python ' + path.join(SCRIPTS_DIR, 'resolution', 'resolution.py') + ' ' + path.join(MATRICES_DIR, matrix) + '"'
+            command += '"python -m scripts.resolution.resolution ' + path.join(MATRICES_DIR, matrix) + '"'
             # command += path.join(BASE_DIR, 'scripts', 'resolution', 'resolution.py') + ' ' + path.join(MATRICES_DIR, matrix)
         elif tool == 'matlab':
             # command = 'psrecord "matlab -nodisplay -nosplash -nodesktop -r \\"addpath(genpath(pwd));resolution(\'' + matrix + '\');exit;\\"" '
