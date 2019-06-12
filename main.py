@@ -3,7 +3,7 @@ import os
 from os import path
 import platform
 import subprocess
-from scripts.definitions import BASE_DIR, MATRICES_DIR, RESULTS_DIR
+from scripts.definitions import BASE_DIR, MATRICES_DIR, RESULTS_DIR, SCRIPTS_DIR
 from scripts.utils.download_matrices import download_matrices
 from scripts.utils.get_statistics import get_statistics
 
@@ -36,7 +36,7 @@ if args.download_matrices:
 
 OS = platform.system().lower()
 matrices = sorted(os.listdir(MATRICES_DIR), key=str.lower)
-for tool in ['matlab']:
+for tool in ['python', 'octave', 'matlab']:
     if not(path.exists(path.join(args.output, tool, OS))):
             os.makedirs(path.join(args.output, tool, OS))
     for matrix in matrices:
@@ -44,12 +44,12 @@ for tool in ['matlab']:
         #             --include-children \
         #             --interval ' + args.interval + ' \
         #             --output ' + path.join(args.output, tool, OS, matrix.split('.')[0] + '.txt') + ' '
-        command = 'psrecord \
+        command = 'python ' + path.join(SCRIPTS_DIR, 'record.py') + ' \
                     --include-children \
                     --log ' + path.join(args.output, tool, OS, matrix.split('.')[0] + '.txt') + ' \
-                    --interval ' + args.interval + ' '
+                    --interval ' + args.interval + ' s'
         if tool == 'python':
-            command += '"python ' + path.join(BASE_DIR, 'scripts', 'resolution', 'resolution.py') + ' ' + path.join(MATRICES_DIR, matrix) + '"'
+            command += '"python ' + path.join(SCRIPTS_DIR, 'resolution', 'resolution.py') + ' ' + path.join(MATRICES_DIR, matrix) + '"'
             # command += path.join(BASE_DIR, 'scripts', 'resolution', 'resolution.py') + ' ' + path.join(MATRICES_DIR, matrix)
         elif tool == 'matlab':
             # command = 'psrecord "matlab -nodisplay -nosplash -nodesktop -r \\"addpath(genpath(pwd));resolution(\'' + matrix + '\');exit;\\"" '
