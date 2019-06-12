@@ -2,7 +2,10 @@ import os
 import requests
 import shutil
 from tqdm import tqdm
-from ..definitions import BASE_DIR, MATRICES_DIR
+try:
+        from scripts.definitions import BASE_DIR, MATRICES_DIR
+except ModuleNotFoundError:
+        from ..definitions import BASE_DIR, MATRICES_DIR
 
 def download_with_resume(url, destination):
     # Check if the requested url is ok, i.e. 200 <= status_code < 400
