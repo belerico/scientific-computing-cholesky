@@ -1,11 +1,12 @@
-import argparse
 import os
-from os import path
+import shutil
+import argparse
 import platform
 import subprocess
-from scripts.definitions import BASE_DIR, MATRICES_DIR, RESULTS_DIR, SCRIPTS_DIR
-from scripts.utils.download_matrices import download_matrices
+from os import path
 from scripts.utils.get_statistics import get_statistics
+from scripts.utils.download_matrices import download_matrices
+from scripts.definitions import BASE_DIR, MATRICES_DIR, RESULTS_DIR, SCRIPTS_DIR
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -36,6 +37,9 @@ if args.download_matrices:
 
 OS = platform.system().lower()
 matrices = sorted(os.listdir(MATRICES_DIR), key=str.lower)
+# Remove previous results 
+if path.exists(RESULTS_DIR):
+    shutil.rmtree(RESULTS_DIR)
 for tool in ['python', 'octave', 'matlab']:
     if not(path.exists(path.join(args.output, tool, OS))):
             os.makedirs(path.join(args.output, tool, OS))
