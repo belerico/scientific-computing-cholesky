@@ -29,9 +29,7 @@ def read_mem(path: str, line_from: int, line_to: int, column: int):
 
 @profile(stream=log)
 def resolve(matrix_path):
-        A = io.loadmat(matrix_path)['Problem']['A'][0][0]
-        # Convert a scipy csc_matrix into a cvxopt sparse matrix
-        A = matrix_utilities.sparse2cvxopt(A)
+        A = matrix_utilities.sparse2cvxopt(io.loadmat(matrix_path)['Problem']['A'][0][0])
         xe = matrix(numpy.ones([A.size[0], 1]))
         b = sparse(A * xe)
         start = time.time()
@@ -58,7 +56,7 @@ if __name__ == '__main__':
         xe, x, elapsed = resolve(matrix_path)
         log.flush()
         log.close()
-        mem = read_mem(os.path.join(LOGS_DIR, matrix_name + '.log'), 6, 22, 3)
+        mem = read_mem(os.path.join(LOGS_DIR, matrix_name + '.log'), 6, 20, 3)
         # if numpy.allclose(x, xe):
         rel_err = linalg.norm(x - xe) / linalg.norm(xe)
         results += 'Relative error: ' + str(rel_err) + '\n'

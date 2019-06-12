@@ -1,5 +1,6 @@
 name: scientific_computing_cholesky
 channels:
+  - auto
   - cvxgrp
   - conda-forge
   - defaults
@@ -72,5 +73,7 @@ dependencies:
   - wrapt=1.11.1=py37h516909a_0
   - xz=5.2.4=h14c3975_1001
   - zlib=1.2.11=h14c3975_1004
+  - pip:
+    - psrecord==1.1
 prefix: /home/belerico/miniconda3/envs/scientific_computing_cholesky
 
