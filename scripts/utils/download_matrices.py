@@ -2,8 +2,6 @@ import os
 import requests
 import shutil
 from tqdm import tqdm
-if __name__ == "__main__" and __package__ is None:
-    __package__ = "scripts.utils.download_matrices"
 from ..definitions import BASE_DIR, MATRICES_DIR
 
 def download_with_resume(url, destination):

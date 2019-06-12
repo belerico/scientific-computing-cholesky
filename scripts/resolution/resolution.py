@@ -7,8 +7,6 @@ from scipy import io, linalg
 from cvxopt import cholmod, matrix, sparse
 from cvxpy.interface import matrix_utilities
 from memory_profiler import profile
-if __name__ == "__main__" and __package__ is None:
-    __package__ = "scripts.resolution.resolution"
 from ..definitions import RESULTS_DIR, LOGS_DIR
 
 matrix_path = sys.argv[1]

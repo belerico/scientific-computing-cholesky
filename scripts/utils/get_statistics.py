@@ -3,8 +3,6 @@ import sys
 import platform
 from os import path
 from pandas import pandas
-if __name__ == "__main__" and __package__ is None:
-    __package__ = "scripts.utils.get_statistics"
 from ..definitions import BASE_DIR
 
 def get_statistics(results_path):
