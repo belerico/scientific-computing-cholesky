@@ -4,7 +4,7 @@ Comparison between different scientific computing tool on the Cholesky decomposi
 Steps for a proper installtion:
 
 * Get [MATLAB](https://it.mathworks.com/downloads/)
-* Get [Octave](https://www.gnu.org/software/octave/download.html) for your operating system: in case you run a linux distribution you msy install Octave from [Flathub](https://flathub.org/apps/details/org.octave.Octave), this is due to the fact that many distributions doens't have the latest Octave release in their official repositories
+* Get [Octave](https://www.gnu.org/software/octave/download.html) for your operating system: in case you run a linux distribution you may install Octave from [Flathub](https://flathub.org/apps/details/org.octave.Octave), this is due to the fact that many distributions doens't have the latest Octave release in their official repositories
 * Get [Miniconda](https://docs.conda.io/en/latest/miniconda.html) and install it for your operating system
 * Clone this repository with `git clone https://github.com/belerico/scientific_computing_cholesky.git`
 * Move to the `PROJECT_ROOT` folder
