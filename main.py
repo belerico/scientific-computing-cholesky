@@ -31,15 +31,26 @@ parser.add_argument(
     help='path to store results', 
     action='store'
 )
+parser.add_argument(
+    '-f', 
+    '--flatpak', 
+    help='whether run octave from flatpak', 
+    action='store_false'
+)
+parser.add_argument(
+    '-r', 
+    '--remove-old-results', 
+    help='whether remove old results folder', 
+    action='store_false'
+)
 args = parser.parse_args()
 if args.download_matrices:
     download_matrices()
+if args.remove_old_results and path.exists(RESULTS_DIR):
+    shutil.rmtree(RESULTS_DIR)
 
 OS = platform.system().lower()
 matrices = sorted(os.listdir(MATRICES_DIR), key=str.lower)
-# Remove previous results 
-if path.exists(RESULTS_DIR):
-    shutil.rmtree(RESULTS_DIR)
 for tool in ['python']:
     if not(path.exists(path.join(args.output, tool, OS))):
             os.makedirs(path.join(args.output, tool, OS))
@@ -67,7 +78,7 @@ for tool in ['python']:
                             resolution(\'' + matrix + '\', \'matlab\'); \
                             exit;\\""'
         else:
-            if OS == 'linux':
+            if OS == 'linux' and args.flatpak:
                 command += '"flatpak run org.octave.Octave '
             else:
                 command += '"octave-cli '
