@@ -51,7 +51,7 @@ if args.remove_old_results and path.exists(RESULTS_DIR):
 
 OS = platform.system().lower()
 matrices = sorted(os.listdir(MATRICES_DIR), key=str.lower)
-for tool in ['python', 'matlab', 'octave']:
+for tool in ['matlab', 'octave']:
     if not(path.exists(path.join(args.output, tool, OS))):
             os.makedirs(path.join(args.output, tool, OS))
     for matrix in matrices:
