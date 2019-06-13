@@ -35,13 +35,13 @@ parser.add_argument(
     '-f', 
     '--flatpak', 
     help='whether run octave from flatpak', 
-    action='store_false'
+    action='store_true'
 )
 parser.add_argument(
     '-r', 
     '--remove-old-results', 
     help='whether remove old results folder', 
-    action='store_false'
+    action='store_true'
 )
 args = parser.parse_args()
 if args.download_matrices:
