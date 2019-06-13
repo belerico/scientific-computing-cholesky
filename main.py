@@ -67,8 +67,12 @@ for tool in ['python', 'octave', 'matlab']:
                             resolution(\'' + matrix + '\', \'matlab\'); \
                             exit;\\""'
         else:
-            command += '"octave-cli \
-                        --no-gui \
+            if OS == 'linux':
+                command += '"flatpak run org.octave.Octave '
+            else:
+                command += '"octave-cli '
+            command += '--no-gui \
+                        --no-window-system \
                         --eval \\"addpath(genpath(\'' + BASE_DIR + '\')); \
                             cd \'' + BASE_DIR + '\'; \
                             resolution(\'' + matrix + '\', \'octave\');\\""'
