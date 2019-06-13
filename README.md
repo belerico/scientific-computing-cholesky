@@ -10,6 +10,7 @@ Steps for a proper installtion:
 * Move to the `PROJECT_ROOT` folder
 * Run `conda env create -f environment.yml`; if some packages are not found, remove them from the environment.yml file and rerun the above command
 * Run `conda activate cholesky`
+* Run `conda update --all`
 * Run `python main.py --help` to get all possible command one may execute
 * Run `python main.py --download-matrices`. This will run, for all our tool (python, MATLAB and Octave) and for all matrices the memory profiler and will generate the following directories, each containing, for all matrices, the stats from the profiler:
 
