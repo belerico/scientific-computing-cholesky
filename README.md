@@ -8,7 +8,7 @@ Steps for a proper installtion:
 * Get [Miniconda](https://docs.conda.io/en/latest/miniconda.html) and install it for your operating system
 * Clone this repository with `git clone https://github.com/belerico/scientific_computing_cholesky.git`
 * Move to the `PROJECT_ROOT` folder
-* Run `conda env create -f environment.yml`; if some packages are not found, remove them from the environment.yml file and rerun the above command
+* Run `conda env create -f environment_os.yml`, where `os` is `linux` or `windows` depending on your operating system; if some packages are not found, remove them from the environment.yml file and rerun the above command
 * Run `conda activate cholesky`
 * Run `conda update --all`
 * Run `python main.py --help` to get all possible command one may execute
