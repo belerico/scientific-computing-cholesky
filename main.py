@@ -40,7 +40,7 @@ matrices = sorted(os.listdir(MATRICES_DIR), key=str.lower)
 # Remove previous results 
 if path.exists(RESULTS_DIR):
     shutil.rmtree(RESULTS_DIR)
-for tool in ['python', 'octave', 'matlab']:
+for tool in ['python']:
     if not(path.exists(path.join(args.output, tool, OS))):
             os.makedirs(path.join(args.output, tool, OS))
     for matrix in matrices:
