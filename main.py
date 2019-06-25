@@ -51,23 +51,17 @@ if args.remove_old_results and path.exists(RESULTS_DIR):
 
 OS = platform.system().lower()
 matrices = sorted(os.listdir(MATRICES_DIR), key=str.lower)
-for tool in ['matlab', 'octave']:
+for tool in ['python', 'matlab', 'octave']:
     if not(path.exists(path.join(args.output, tool, OS))):
             os.makedirs(path.join(args.output, tool, OS))
     for matrix in matrices:
-        # command = 'mprof run \
-        #             --include-children \
-        #             --interval ' + args.interval + ' \
-        #             --output ' + path.join(args.output, tool, OS, matrix.split('.')[0] + '.txt') + ' '
         command = 'python ' + path.join(SCRIPTS_DIR, 'record.py') + ' \
                     --include-children \
                     --log ' + path.join(args.output, tool, OS, matrix.split('.')[0] + '.txt') + ' \
                     --interval ' + args.interval + ' '
         if tool == 'python':
             command += '"python -m scripts.resolution.resolution ' + path.join(MATRICES_DIR, matrix) + '"'
-            # command += path.join(BASE_DIR, 'scripts', 'resolution', 'resolution.py') + ' ' + path.join(MATRICES_DIR, matrix)
         elif tool == 'matlab':
-            # command = 'psrecord "matlab -nodisplay -nosplash -nodesktop -r \\"addpath(genpath(pwd));resolution(\'' + matrix + '\');exit;\\"" '
             command += '"matlab \
                         -wait \
                         -nodisplay \
